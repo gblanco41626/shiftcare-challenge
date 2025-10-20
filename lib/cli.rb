@@ -11,10 +11,10 @@ module MyCli
 
       return if help
 
-      my_command = MyCli::Commands::BaseCommand.build(command, options)
+      my_command = MyCli::CommandRegistry.fetch(command).new(options)
       my_command.validate
       my_command.run
-    rescue OptionParser::MissingArgument => e
+    rescue => e
       puts "Error: #{e.message}"
     end
 

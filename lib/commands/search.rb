@@ -4,8 +4,14 @@ module MyCli
   module Commands
     class Search < BaseCommand
 
-      def initialize(command, options)
-        super(command, options)
+      MyCli::CommandRegistry.register(
+        'search',
+        self,
+        description: 'Search clients by full name'
+      )
+
+      def initialize(options)
+        super(options)
 
         @query = @options[:query]
       end
@@ -14,7 +20,7 @@ module MyCli
         super
 
         if @query.nil? || @query.strip.empty?
-          puts "Error: Please provide --query. #{HELP_STRING}"
+          puts "Error: Please provide --query. #{MyCli::Utils::MyOptionParser::HELP_STRING}"
           exit 1
         end
       end

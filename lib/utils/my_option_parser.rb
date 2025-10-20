@@ -4,6 +4,8 @@ module MyCli
   module Utils
     class MyOptionParser
 
+      HELP_STRING = 'Run with -h for help.'
+
       def self.parse(argv)
         options = {}
 
@@ -11,8 +13,10 @@ module MyCli
           opts.banner = 'Usage: bin/shiftcare_challenge <command> [options]'
           opts.separator ''
           opts.separator 'Commands:'
-          opts.separator '  search            Search clients by name'
-          opts.separator '  find-duplicate    Find duplicate emails'
+
+          MyCli::CommandRegistry.commands.each do |command, meta|
+            opts.separator "  #{command.ljust(15)} - #{meta[:description]}"
+          end
           opts.separator ''
           opts.separator 'Options:'
 

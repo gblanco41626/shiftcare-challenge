@@ -4,6 +4,12 @@ module MyCli
   module Commands
     class FindDuplicate < BaseCommand
 
+      MyCli::CommandRegistry.register(
+        'find-duplicate',
+        self,
+        description: 'Find duplicate emails'
+      )
+
       def execute
         emails = clients.map { |client| client['email'] }.compact
 

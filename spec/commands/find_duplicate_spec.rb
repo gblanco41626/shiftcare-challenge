@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe MyCli::Commands::FindDuplicate do
-  subject(:my_command)  { described_class.new('find-duplicate', options) }
+  subject(:my_command)  { described_class.new(options) }
   let(:options)         { { file: file } }
   let(:file)            { File.expand_path('../support/with_dup_email.json', __dir__) }
   let(:no_duplicate)    { File.expand_path('../support/clients.json', __dir__) }

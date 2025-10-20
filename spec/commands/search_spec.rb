@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe MyCli::Commands::Search do
-  subject(:my_command)  { described_class.new('search', options) }
+  subject(:my_command)  { described_class.new(options) }
   let(:file)            { File.expand_path('../support/clients.json', __dir__) }
   let(:options)         { { file: file, query: 'john' } }
 

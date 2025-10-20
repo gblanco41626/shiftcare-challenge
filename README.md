@@ -66,12 +66,6 @@ This CLI tool is designed to be simple and functional but makes a few assumption
 
 - **Improve URL and file path validation**
   - Add stricter validation and sanitization to prevent injection risks and invalid data.
-- **Introduce a Command Registry**
-  - Replace dynamic subclass scanning with a centralized registry that explicitly registers each command.
-  - Benefits:
-    - Improved performance for larger codebases.
-    - Easier debugging and clearer error handling.
-    - More flexible for adding command metadata (aliases, descriptions, usage examples).
 - **Improve required options for each command**
   - Define and dynamically validate required options per command (e.g., --file, --query).
   - This makes it easier to catch missing parameters early, improves test coverage, and keeps command behavior consistent.
@@ -81,3 +75,12 @@ This CLI tool is designed to be simple and functional but makes a few assumption
   - Makes it easier to replace or mock the parser without modifying command logic.
 - **Command-specific help**
   - Extend the OptionParser to provide dedicated help messages for each command (e.g. search -h).
+
+## Improvements made after Initial implementation
+
+- **Introduce a Command Registry**
+  - Replace dynamic subclass scanning with a centralized registry that explicitly registers each command.
+  - Benefits:
+    - Improved performance for larger codebases.
+    - Easier debugging and clearer error handling.
+    - More flexible for adding command metadata (aliases, descriptions, usage examples).
