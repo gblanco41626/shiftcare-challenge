@@ -7,6 +7,8 @@ module MyCli
       end
 
       def run
+        validate
+
         results = execute
 
         puts results.empty? ? 'No results found' : results
@@ -16,9 +18,12 @@ module MyCli
       end
 
       def validate
-        if @options[:file].nil?
-          puts "Error: Please provide --file. #{MyCli::Utils::MyOptionParser::HELP_STRING}"
-          exit 1
+        required_options.each do |opt|
+          key = opt.to_sym
+
+          if @options[key].nil? || @options[key].strip.empty?
+            raise Exceptions::MissingOptionError.new(key)
+          end
         end
       end
 
@@ -28,6 +33,10 @@ module MyCli
 
       def execute
         raise NotImplementedError, "Subclasses must implement 'execute'"
+      end
+
+      def required_options
+        []
       end
 
     end

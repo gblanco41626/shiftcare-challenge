@@ -6,43 +6,27 @@ RSpec.describe MyCli::Commands::Search do
   let(:options)         { { file: file, query: 'john' } }
 
   describe '#validate' do
-    context 'when expected options are complete' do
-      it 'does not output to stdout' do
-        allow(my_command).to receive(:exit)
-
-        expect { my_command.validate }.not_to output.to_stdout
-      end
-
-      it 'does not raise error' do
-        expect { my_command.validate }.not_to raise_error
-      end
+    it 'does not raise error when options are complete' do
+      expect { my_command.validate }.not_to raise_error
     end
 
     context 'when expected options is missing file' do
       let(:options) { { query: 'john' } }
 
-      it 'prints message to stdout' do
-        allow(my_command).to receive(:exit)
-
-        expect { my_command.validate }.to output(/Error: Please provide --file\. Run with -h for help\./).to_stdout
-      end
-
-      it 'exits' do
-        expect { my_command.validate }.to raise_error(SystemExit)
+      it 'raises error' do
+        expect { my_command.validate }.to raise_error(
+          MyCli::Exceptions::MissingOptionError, "Error: Please provide --file"
+        )
       end
     end
 
     context 'when expected options is missing query' do
       let(:options) { { file: file } }
 
-      it 'prints message to stdout' do
-        allow(my_command).to receive(:exit)
-
-        expect { my_command.validate }.to output(/Error: Please provide --query\. Run with -h for help\./).to_stdout
-      end
-
-      it 'exits' do
-        expect { my_command.validate }.to raise_error(SystemExit)
+      it 'raises error' do
+        expect { my_command.validate }.to raise_error(
+          MyCli::Exceptions::MissingOptionError, "Error: Please provide --query"
+        )
       end
     end
   end

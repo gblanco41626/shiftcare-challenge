@@ -19,6 +19,10 @@ module MyCli
         emails_count.keys.select { |email| emails_count[email] > 1 }
       end
 
+      def required_options
+        [:file]
+      end
+
     end
   end
 end

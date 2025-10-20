@@ -11,9 +11,7 @@ module MyCli
 
       return if help
 
-      my_command = MyCli::CommandRegistry.fetch(command).new(options)
-      my_command.validate
-      my_command.run
+      MyCli::CommandRegistry.fetch(command).new(options).run
     rescue => e
       puts "Error: #{e.message}"
     end

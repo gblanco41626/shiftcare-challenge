@@ -16,21 +16,16 @@ module MyCli
         @query = @options[:query]
       end
 
-      def validate
-        super
-
-        if @query.nil? || @query.strip.empty?
-          puts "Error: Please provide --query. #{MyCli::Utils::MyOptionParser::HELP_STRING}"
-          exit 1
-        end
-      end
-
       def execute
         results = clients.select do |client|
           client['full_name'].downcase.include?(@query.downcase)
         end
 
         results.map { |res| res['full_name'] }
+      end
+
+      def required_options
+        [:file, :query]
       end
 
     end

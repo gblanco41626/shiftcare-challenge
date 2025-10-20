@@ -59,17 +59,12 @@ This CLI tool is designed to be simple and functional but makes a few assumption
 - **Error handling**
   - Invalid URLs or file paths will return an empty array during processing rather than raise an error.
 - **Command validation**
-  - Valid commands are determined by iterating through all loaded Ruby classes and checking subclasses of BaseCommand.
-  - While this is flexible for small projects, it can introduce performance overhead as the codebase grows.
+  - Valid commands are registered on load
 
 ## Notes for Future Improvements
 
 - **Improve URL and file path validation**
   - Add stricter validation and sanitization to prevent injection risks and invalid data.
-- **Improve required options for each command**
-  - Define and dynamically validate required options per command (e.g., --file, --query).
-  - This makes it easier to catch missing parameters early, improves test coverage, and keeps command behavior consistent.
-  - Dynamically validating required options enhances testability and reduces the risk of runtime errors.
 - **Dependency injection for JSON parsing**
   - Allow pluggable JSON parsing services for better testing and maintainability.
   - Makes it easier to replace or mock the parser without modifying command logic.
@@ -84,3 +79,7 @@ This CLI tool is designed to be simple and functional but makes a few assumption
     - Improved performance for larger codebases.
     - Easier debugging and clearer error handling.
     - More flexible for adding command metadata (aliases, descriptions, usage examples).
+- **Improve required options for each command**
+  - Define and dynamically validate required options per command (e.g., --file, --query).
+  - This makes it easier to catch missing parameters early, improves test coverage, and keeps command behavior consistent.
+  - Dynamically validating required options enhances testability and reduces the risk of runtime errors.
